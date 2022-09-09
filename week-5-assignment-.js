@@ -2,12 +2,12 @@
 class Animal {
     constructor(name, age) {
         this.name=name;
-        this.age=age;
+        this.age='Critter age: ' + age;
     }
 //describe method to print out info on animal 
-    describe() {
-        return `${this.name} is ${this.age} old ʕ •ᴥ•ʔ `;
-    }
+    //describe() {
+        //return `${this.name} is ${this.age} old ʕ •ᴥ•ʔ `;
+    //}
     }
 
 class Creature {
@@ -39,7 +39,6 @@ class Menu {
         this.creatures=[];
         // the selection is null at first because no creature class is selected
         this.selectedCreature = null;
-
     }
     //entry point to our application
     start(){
@@ -65,7 +64,7 @@ class Menu {
                 selection =0;
             }
             //outside of switch, this allows to keep looping aslong as we dont select 0 or something other than 1-4
-            selection = this.showMainMenuOptions
+            selection = this.showMainMenuOptions()
 
         //this is the flow of my application 1) show menu option 
         //2)user will select something 3)aslong of not 0 we are going to create,view,delete,or diplay
@@ -96,12 +95,13 @@ class Menu {
     }
 
     displayCreatures(){
-        let creatureString = '';
+        let creatureString = '' ;
         //this.creatures is a list of all the creatures that exist 
-        for (i = 0; i < this.creatures.length; i++){
+        for (let i = 0; i < this.creatures.length; i++) {
             creatureString += i + ') ' +this.creatures[i].name + '\n';
             //this is going to create a blank string, itterate through the creatures, get each creater and names and add a new line 
             // each creature will be numbers with its index number 
+            // console.log(this.creatures)
         }
         alert(creatureString);
     }
@@ -109,6 +109,8 @@ class Menu {
     createCreature(){
         let name = prompt('Enter creature (species) name:');
         this.creatures.push(new Creature(name));
+        // console.log(this.creatures)
+   
         //prompt the user for the name of speices and push that into the creature array
     }
 
@@ -117,7 +119,7 @@ class Menu {
         //this is to validate user input 
         if (index > -1 && index < this.creatures.length){
             this.selectedCreature = this.creatures[index];
-        let description = 'Creature Species: ' + this.selectedCreature.name + '\n';
+        let description = 'Creature Species : ' + this.selectedCreature.name + '\n';
 
         //this loop will allow us to add the descriptions of the critters in the creatures class 
         //this will list all the animals in the exhinit and age
@@ -148,12 +150,12 @@ deleteCreature(){
 // sub menu options 
 createAnimal(){
     let name = prompt (`Enter Name for new animal:`);
-    let age = prompt (' Enter Age of new animal');
+    let age = prompt (' Enter Age of new animal:');
     this.selectedCreature.animals.push(new Animal(name,age))
 }
 deleteAnimal(){
     let index = prompt('Enter the index of the Animal you wish to delete:');
-    if (indext > -1 && index < this.selectedCreature.animals.length){
+    if (index > -1 && index < this.selectedCreature.animals.length){
         this.selectedCreature.animals.splice(index,1);
     }
 }
